@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+####################################################################################
+# - COPYRIGHT - 
+####################################################################################
+
 """
 header-cli — A simple CLI utility for generating formatted text headers.
 
@@ -8,10 +12,18 @@ Copyright (c) 2025 Bogdan Pricope
 SPDX-License-Identifier: BSD-3-Clause
 """
 
+####################################################################################
+# - MODULES - 
+####################################################################################
+
 import argparse
 
+####################################################################################
+# - FUNCTIONS - 
+####################################################################################
+
 def header(head, style='single', char='#', width=84):
-    """This function takes a string and formats it as a header, using the specified style and character."""
+    """This function takes a string and formats it as a header, using the specified style, width and character."""
     border = char * width
     formatted_head = " - " + head.upper() + " - "
     if style == 'single':
@@ -25,8 +37,8 @@ def main():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
 
-    parser.add_argument("head", nargs="?", help="The title text")
-    parser.add_argument("-H", "--head", dest="header", help="The title text (alternative flag form)")
+    parser.add_argument("head", nargs="?", help="The header text")
+    parser.add_argument("-H", "--head", dest="header", help="The header text (alternative flag form)")
     parser.add_argument("-s", "--style", choices=["single", "multi"], default="single", help="Border style")
     parser.add_argument("-c", "--char", default="#", help="Character to use for the border")
     parser.add_argument("-w", "--width", default=84, help="Width of the rows", type=int)
@@ -40,5 +52,13 @@ def main():
 
     print(header(head, args.style, args.char, args.width))
 
+####################################################################################
+# - EXEC - 
+####################################################################################
+
 if __name__ == "__main__":
     main()
+
+####################################################################################
+# - END - 
+####################################################################################
