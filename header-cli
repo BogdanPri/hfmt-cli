@@ -4,7 +4,7 @@
 """
 header-cli — A simple CLI utility for generating formatted text headers.
 
-Copyright (c) 2025 Shane Duffy
+Copyright (c) 2025 Bogdan Pricope
 SPDX-License-Identifier: BSD-3-Clause
 """
 
