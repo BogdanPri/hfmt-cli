@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+header-cli — A simple CLI utility for generating formatted text headers.
+
+Copyright (c) 2025 Shane Duffy
+SPDX-License-Identifier: BSD-3-Clause
+"""
+
+import argparse
+
+def header(head, style='single', char='#', width=84):
+    """This function takes a string and formats it as a header, using the specified style and character."""
+    border = char * width
+    formatted_head = " - " + head.upper() + " - "
+    if style == 'single':
+        return f"{formatted_head:{char}^{width}}"
+    else:
+        return f"{border}\n{char}{formatted_head}\n{border}"
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Format a title with a border.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+
+    parser.add_argument("head", nargs="?", help="The title text")
+    parser.add_argument("-H", "--head", dest="header", help="The title text (alternative flag form)")
+    parser.add_argument("-s", "--style", choices=["single", "multi"], default="single", help="Border style")
+    parser.add_argument("-c", "--char", default="#", help="Character to use for the border")
+    parser.add_argument("-w", "--width", default=84, help="Width of the rows", type=int)
+
+    args = parser.parse_args()
+
+    # Prefer --head flag over positional head
+    head = args.header or args.head
+    if not head:
+        parser.error("You must provide a title, either positionally or with -H/--head.")
+
+    print(header(head, args.style, args.char, args.width))
+
+if __name__ == "__main__":
+    main()
