@@ -17,7 +17,7 @@ $ header "project title"
 
 Run with flags:
 ```console
-$ header --head "build complete" --style multi --char "=" --width 60 -upper
+$ header --head "build complete" --style multi --char "=" --width 60 --upper
 ============================================================
 = - BUILD COMPLETE - 
 ============================================================
@@ -25,7 +25,7 @@ $ header --head "build complete" --style multi --char "=" --width 60 -upper
 
 ### ⚙️ Options
 
-`header-cli` supports the following flags:
+`header-cli` supports the following value flags:
 
 | Flag | Description | Default |
 |------|-------------|---------|
@@ -34,7 +34,15 @@ $ header --head "build complete" --style multi --char "=" --width 60 -upper
 | `-s, --style` | Border style (`single`, `multi`) | `single` |
 | `-c, --char` | Character to use for the border | `#` |
 | `-w, --width` | Width of the rows | `84` |
-| `-C, --case` | Case of the header | `upper` |
+
+`header-cli` supports the following value toggles:
+
+| Toggle | Description |
+|--------|-------------|
+| `-U, --upper` | Converts header to "UPPERCASE" |
+| `-L, --lower` | Converts header to "lowercase" |
+| `-T, --title` | Converts header to "Title_Case" |
+| `-S, --swapcase` | Converts header to "sWAPcASE" |
 
 ## 🚀 Installation
 

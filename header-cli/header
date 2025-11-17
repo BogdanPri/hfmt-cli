@@ -54,10 +54,10 @@ def main():
     ####################### - BOOLEAN FLAGS CONFIGURATION - ########################
 
     case_group = parser.add_mutually_exclusive_group()
-    case_group.add_argument("-U", "--upper", action="store_true", help="Convert header to UPPERCASE")
-    case_group.add_argument("-L" ,"--lower", action="store_true", help="Convert header to lowercase")
-    case_group.add_argument("-T", "--title", action="store_true", help="Convert header to Title Case")
-    case_group.add_argument("-S", "--swapcase", action="store_true", help="Convert header to sWAPcASE")
+    case_group.add_argument("-U", "--upper", action="store_true", help="Converts header to UPPERCASE")
+    case_group.add_argument("-L" ,"--lower", action="store_true", help="Converts header to lowercase")
+    case_group.add_argument("-T", "--title", action="store_true", help="Converts header to Title_Case")
+    case_group.add_argument("-S", "--swapcase", action="store_true", help="Converts header to sWAPcASE")
 
     ############################# - ARGUMENT PARSING - #############################
 
