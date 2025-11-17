@@ -24,18 +24,26 @@ import argparse
 
 def header(head, style='single', char='#', width=84):
     """This function takes a string and formats it as a header, using the specified style, width and character."""
+
     border = char * width
-    formatted_head = " - " + head.upper() + " - "
+
+    formatted_head = " - " + head + " - "
+
     if style == 'single':
         return f"{formatted_head:{char}^{width}}"
     else:
         return f"{border}\n{char}{formatted_head}\n{border}"
 
 def main():
+
+    ############################### - PARSER SETUP - ###############################
+
     parser = argparse.ArgumentParser(
         description="Format a title with a border.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
+
+    ####################### - VALUE OPTIONS CONFIGURATION - ########################
 
     parser.add_argument("head", nargs="?", help="The header text")
     parser.add_argument("-H", "--head", dest="header", help="The header text (alternative flag form)")
@@ -43,12 +51,35 @@ def main():
     parser.add_argument("-c", "--char", default="#", help="Character to use for the border")
     parser.add_argument("-w", "--width", default=84, help="Width of the rows", type=int)
 
+    ####################### - BOOLEAN FLAGS CONFIGURATION - ########################
+
+    case_group = parser.add_mutually_exclusive_group()
+    case_group.add_argument("-U", "--upper", action="store_true", help="Convert header to UPPERCASE")
+    case_group.add_argument("-L" ,"--lower", action="store_true", help="Convert header to lowercase")
+    case_group.add_argument("-T", "--title", action="store_true", help="Convert header to Title Case")
+    case_group.add_argument("-S", "--swapcase", action="store_true", help="Convert header to sWAPcASE")
+
+    ############################# - ARGUMENT PARSING - #############################
+
     args = parser.parse_args()
+
+    ############################ - HEADER FORMATTING - #############################
 
     # Prefer --head flag over positional head
     head = args.header or args.head
     if not head:
         parser.error("You must provide a title, either positionally or with -H/--head.")
+
+    if args.upper:
+        head = head.upper()
+    elif args.lower:
+        head = head.lower()
+    elif args.title:
+        head = head.title()
+    elif args.swapcase:
+        head = head.swapcase()
+
+    ############################## - FUNCTION CALL - ###############################
 
     print(header(head, args.style, args.char, args.width))
 

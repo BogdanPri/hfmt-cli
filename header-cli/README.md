@@ -11,13 +11,13 @@ A simple CLI utility for generating formatted text headers.
 Run with a positional argument: 
 
 ```console
-$ header-cli "Project Title"
-################################ - PROJECT TITLE - #################################
+$ header "project title"
+################################ - project title - #################################
 ```
 
 Run with flags:
 ```console
-$ header-cli -H "build complete" -s multi -c "=" -w 60
+$ header --head "build complete" --style multi --char "=" --width 60 -upper
 ============================================================
 = - BUILD COMPLETE - 
 ============================================================
@@ -34,6 +34,7 @@ $ header-cli -H "build complete" -s multi -c "=" -w 60
 | `-s, --style` | Border style (`single`, `multi`) | `single` |
 | `-c, --char` | Character to use for the border | `#` |
 | `-w, --width` | Width of the rows | `84` |
+| `-C, --case` | Case of the header | `upper` |
 
 ## 🚀 Installation
 
@@ -49,22 +50,22 @@ cd utils/header
 Make files executable:
 
 ```bash
-chmod +x header-cli
+chmod +x header
 ```
 
 Additionally, you can copy any app to a location in your PATH:
 
 ```bash
-cp header-cli ~/.local/bin/header-cli
+cp header ~/.local/bin/header
 ```
 
 ### Windows
 
-Copy `header-cli` to a location of your choice. Then, create a batch file to call it from the terminal:
+Copy `header` to a location of your choice. Then, create a batch file to call it from the terminal:
 
-e.g. `header-cli.bat`:
+e.g. `header.bat`:
 ```cmd
 @echo off
-python C:\path\to\header-cli %*
+python C:\path\to\header %*
 ```
-Then, copy `header-cli.bat` to a location in your PATH.
+Then, copy `header.bat` to a location in your PATH.
