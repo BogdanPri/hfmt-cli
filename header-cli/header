@@ -17,6 +17,7 @@ SPDX-License-Identifier: BSD-3-Clause
 ####################################################################################
 
 import argparse
+import sys
 
 ####################################################################################
 # - FUNCTIONS - 
@@ -68,7 +69,10 @@ def main():
     # Prefer --head flag over positional head
     head = args.header or args.head
     if not head:
-        parser.error("You must provide a title, either positionally or with -H/--head.")
+        if not sys.stdin.isatty():
+            head = sys.stdin.read().strip()
+        else:
+            parser.error("You must provide a title, either positionally or with -H/--head.")
 
     if args.upper:
         head = head.upper()
