@@ -26,6 +26,11 @@ import sys
 def header(head, style='single', char='#', width=84):
     """This function takes a string and formats it as a header, using the specified style, width and character."""
 
+    char_len = len(char)
+
+    if char_len > 1:
+        char = char[0]
+
     border = char * width
 
     formatted_head = " - " + head + " - "
@@ -33,7 +38,7 @@ def header(head, style='single', char='#', width=84):
     if style == 'single':
         return f"{formatted_head:{char}^{width}}"
     else:
-        return f"{border}\n{char}{formatted_head}\n{border}"
+        return f"{border}\n{char * char_len}{formatted_head}\n{border}"
 
 def main():
 
@@ -68,7 +73,9 @@ def main():
 
     # Prefer --head flag over positional head
     head = args.header or args.head
+
     if not head:
+        # If neither positional nor flag provided, read from stdin (pipe)
         if not sys.stdin.isatty():
             head = sys.stdin.read().strip()
         else:
