@@ -23,8 +23,52 @@ import sys
 # - FUNCTIONS - 
 ####################################################################################
 
-def header(head, style='single', char='#', width=84):
+def header(head: str, style: str, char: str, width: int, decor: str | None, box: int) -> str:
     """This function takes a string and formats it as a header, using the specified style, width and character."""
+
+    ########################### - BOXED HEADER FORMAT - ############################
+
+    if decor is None:
+        formatted_head = f" {head} "
+    else:
+        formatted_head = f" {decor} {head} {decor} "
+
+    if box > 0:
+        if box == 1: # style 1
+            v  = "║" # vertical
+            h  = "═" # horizontal
+            ul = "╔" # upper left
+            ur = "╗" # upper right
+            bl = "╚" # bottom left
+            br = "╝" # bottom right
+        elif box == 2: # style 2
+            v  = "│" # vertical
+            h  = "─" # horizontal
+            ul = "┌" # upper left
+            ur = "┐" # upper right
+            bl = "└" # bottom left
+            br = "┘" # bottom right
+        elif box == 3: # style 3
+            v  = "┃" # vertical
+            h  = "━" # horizontal
+            ul = "┏" # upper left
+            ur = "┓" # upper right
+            bl = "┗" # bottom left
+            br = "┛" # bottom right
+        else: # style 4
+            v  = "│" # vertical
+            h  = "─" # horizontal
+            ul = "╭" # upper left
+            ur = "╮" # upper right
+            bl = "╰" # bottom left
+            br = "╯" # bottom right
+
+        top     = ul + h * (width - 2) + ur
+        bottom  = bl + h * (width - 2) + br
+
+        return f"{top}\n{v}{formatted_head:^{width - 2}}{v}\n{bottom}"
+
+    ############################ - CHAR HEADER FORMAT - ############################
 
     char_len = len(char)
 
@@ -32,8 +76,6 @@ def header(head, style='single', char='#', width=84):
         char = char[0]
 
     border = char * width
-
-    formatted_head = " - " + head + " - "
 
     if style == 'single':
         return f"{formatted_head:{char}^{width}}"
@@ -52,18 +94,20 @@ def main():
     ####################### - VALUE OPTIONS CONFIGURATION - ########################
 
     parser.add_argument("head", nargs="?", help="The header text")
-    parser.add_argument("-H", "--head", dest="header", help="The header text (alternative flag form)")
-    parser.add_argument("-s", "--style", choices=["single", "multi"], default="single", help="Border style")
-    parser.add_argument("-c", "--char", default="#", help="Character to use for the border")
-    parser.add_argument("-w", "--width", default=84, help="Width of the rows", type=int)
+    parser.add_argument("-H", "--head", dest="header", help="The header text (alternative flag form).")
+    parser.add_argument("-s", "--style", choices=["single", "multi"], default="single", help="Border style.")
+    parser.add_argument("-c", "--char", default="#", help="Character to use for the border.")
+    parser.add_argument("-w", "--width", default=84, help="Width of the rows.", type=int)
+    parser.add_argument("-b", "--box", choices=[1,2,3,4], default=0, help="Used do display boxed text.", type=int)
+    parser.add_argument("-d", "--decor", default=None, help="Decoration surrounding the header.")
 
     ####################### - BOOLEAN FLAGS CONFIGURATION - ########################
 
     case_group = parser.add_mutually_exclusive_group()
-    case_group.add_argument("-U", "--upper", action="store_true", help="Converts header to UPPERCASE")
-    case_group.add_argument("-L" ,"--lower", action="store_true", help="Converts header to lowercase")
-    case_group.add_argument("-T", "--title", action="store_true", help="Converts header to Title_Case")
-    case_group.add_argument("-S", "--swapcase", action="store_true", help="Converts header to sWAPcASE")
+    case_group.add_argument("-U", "--upper", action="store_true", help="Converts header to UPPERCASE.")
+    case_group.add_argument("-L" ,"--lower", action="store_true", help="Converts header to lowercase.")
+    case_group.add_argument("-T", "--title", action="store_true", help="Converts header to Title_Case.")
+    case_group.add_argument("-S", "--swapcase", action="store_true", help="Converts header to sWAPcASE.")
 
     ############################# - ARGUMENT PARSING - #############################
 
@@ -92,7 +136,7 @@ def main():
 
     ############################## - FUNCTION CALL - ###############################
 
-    print(header(head, args.style, args.char, args.width))
+    print(header(head, args.style, args.char, args.width, args.decor, args.box))
 
 ####################################################################################
 # - EXEC - 
