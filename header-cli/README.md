@@ -17,7 +17,7 @@ $ header "project title"
 
 Run with flags:
 ```console
-$ header --head "- build complete -" --style multi --char "=" --width 60 --upper
+$ header --head "- build complete -" --style multi --char "=" --width 60 --upper --align left
 ============================================================
 = - BUILD COMPLETE - 
 ============================================================
@@ -42,6 +42,7 @@ $ header --title --width auto --box double "welcome back"
 | `-s, --style` | Border style (`single`, `multi`) | `single` |
 | `-c, --char` | Character to use for the border | `#` |
 | `-w, --width` | Width of the rows | `84` |
+| `-a, --align` | Header justification | `center` or `left` (depending on style) |
 | `-b, --box` | Surround header by a box (overrides other flags) | `none` |
 
 `header-cli` supports the following value toggles:
