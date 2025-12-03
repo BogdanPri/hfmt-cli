@@ -15,11 +15,16 @@ $ header "project title"
 ################################## project title ###################################
 ```
 
+```console
+$ header --border-only --width 50
+##################################################
+```
+
 Run with flags:
 ```console
-$ header --head "- build complete -" --style multi --char "=" --width 60 --upper --align left
+$ header --head "build complete" --style multi --char "=" --width 60 --upper --align left
 ============================================================
-= - BUILD COMPLETE - 
+= BUILD COMPLETE 
 ============================================================
 ```
 
@@ -53,6 +58,7 @@ $ header --title --width auto --box double "welcome back"
 | `-L, --lower` | Converts header to "lower_case" |
 | `-T, --title` | Converts header to "Title_Case" |
 | `-S, --swapcase` | Converts header to "sWAP_cASE" |
+| `--border-only` | Returns only a border of characters with no header |
 
 ## 🚀 Installation
 
