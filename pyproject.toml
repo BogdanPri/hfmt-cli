@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hfmt-cli"
+version = "0.1.0"
+description = "A simple CLI utility for generating formatted text headers with borders and boxes."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Bogdan Pricope"}]
+requires-python = ">=3.9"
+keywords = ["cli", "formatting", "headers", "borders", "boxes", "ascii", "unicode"]
+
+[project.scripts]
+hfmt = "hfmt.cli:main"

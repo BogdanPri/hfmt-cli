@@ -6,7 +6,7 @@
   <img alt="GitHub top language" src="https://badges.fw-web.space/github/languages/top/BogdanPri/header-cli?style=flat-square">
 </p>
 
-A simple CLI utility for generating formatted text headers.
+A simple CLI utility for generating formatted text headers with borders and boxes.
 
 ## 📦 Requirements
 
@@ -69,4 +69,13 @@ $ hfmt --title --width auto --box double "welcome back"
 
 ## 🚀 Installation
 
-* work in progress
+Clone the git repo:
+```console
+git clone https://www.github.com/BogdanPri/hfmt-cli.git
+```
+
+Install via `pip`:
+```console
+cd hfmt-cli
+pip install -e .
+```
