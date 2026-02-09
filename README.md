@@ -1,6 +1,12 @@
 # hfmt-cli
 
-<p align="left">
+<p align="center">
+  <a href="https://github.com/BogdanPri/hfmt-cli/raw/main/hfmt_demo.gif">
+    <img src="https://github.com/BogdanPri/hfmt-cli/raw/main/hfmt_demo.gif"/>
+  </a>
+</p>
+
+<p align="center">
   <a href="https://badge.fury.io/py/hfmt-cli"><img src="https://badge.fury.io/py/hfmt-cli.svg" alt="PyPI version"></a>
   <img src="https://badges.fw-web.space/github/license/BogdanPri/hfmt-cli">
   <img src="https://badges.fw-web.space/github/languages/code-size/BogdanPri/hfmt-cli">
