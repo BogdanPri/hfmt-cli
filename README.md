@@ -17,7 +17,7 @@ A simple CLI utility for generating formatted text headers with borders and boxe
 
 ## 📦 Requirements
 
-* Python >= 3.9
+* Python ≥ 3.9
 
 ## 🛠 Usage
 
