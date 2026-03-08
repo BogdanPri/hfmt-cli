@@ -29,7 +29,8 @@ def hfmt(head: str, args) -> str:
 
     ########################### - BOXED HEADER FORMAT - ############################
 
-    formatted_head: str = f" {head} "
+    formatted_head: list[str] = [f" {h} " for h in head.splitlines()]
+
     char_len: int = len(args.char)
 
     if char_len > 1:
@@ -41,7 +42,7 @@ def hfmt(head: str, args) -> str:
             chars: str = ""
     else:
         char0: str = args.char
-        char1:  str = args.char
+        char1: str = args.char
         chars: str = ""
 
     width: int = get_width(args.width, args.box, args.style, char_len, formatted_head)
@@ -58,26 +59,45 @@ def hfmt(head: str, args) -> str:
     ############################ - CHAR HEADER FORMAT - ############################
 
     if args.style == 'multi':
+
+        _header_lines = [
+            f"{char0*char_len}{_head:{align}{width-char_len}}\n" for _head in formatted_head
+        ]
+
         return (
             f"{border}\n"
-            f"{char0*char_len}{formatted_head:{align}{width-char_len}}\n"
+            f"{''.join(_header_lines)}"
             f"{border}"
         )
     if args.style == 'boxed':
+
+        _header_lines = [
+            f"{_head:{align}{width-2*char_len}}" for _head in formatted_head
+        ]
+
         return (
             f"{border}\n{char0}{char1 * (char_len-1)}"
-            f"{formatted_head:{align}{width-2*char_len}}"
+            f"{''.join(_header_lines)}"
             f"{char1 * (char_len-1)}{char0}\n{border}"
         )
-    return f"{char0}{chars}{formatted_head:{char1}{align}{width - 2*(1 + len(chars))}}{chars[::-1]}{char0}"
+
+    _header_lines = [
+        f"{_head:{char1}{align}{width - 2*(1 + len(chars))}}" for _head in formatted_head
+    ]
+
+
+    return f"{char0}{chars}{'\n'.join(_header_lines)}{chars[::-1]}{char0}"
 
 ################################### FORMAT WIDTH ###################################
 
-def get_width(width: str, box: str, style: str, char_len: int, fmt_header: str) -> int:
+def get_width(width: str, box: str, style: str, char_len: int, fmt_header: list[str]) -> int:
     """Determine the width of the header based on input parameters."""
 
+    # Calculate the maximum length of the formatted header lines
+    max_fmt_header: int = max(len(h) for h in fmt_header)
+
     default: int = 84
-    header_width: int = len(fmt_header) + 2 * char_len
+    header_width: int = max_fmt_header + 2 * char_len
 
     is_auto_width: list[bool] = [
         width.lower() == "auto",
@@ -161,7 +181,11 @@ def draw_boxed(head, box: str, width: int, align: str) -> str:
     top     = ul + h * (width - 2) + ur
     bottom  = bl + h * (width - 2) + br
 
-    return f"{top}\n{v}{head:{align}{width - 2}}{v}\n{bottom}"
+    _header_lines = [
+        f"{v}{_head:{align}{width - 2}}{v}" for _head in head
+    ]
+
+    return f"{top}\n{'\n'.join(_header_lines)}\n{bottom}"
 
 ####################################################################################
 # - MAIN -
