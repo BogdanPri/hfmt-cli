@@ -77,12 +77,7 @@ $ hfmt --title --width auto --box double "welcome back"
 
 ## 🚀 Installation
 
-Install via [`pipx`](https://github.com/pypa/pipx) (recommended)
+Install via [`pipx`](https://github.com/pypa/pipx)
 ```console
 pipx install hfmt-cli
-```
-
-Install via `pip`:
-```console
-pip install hfmt-cli
 ```
