@@ -48,7 +48,7 @@ def hfmt(head: str, args) -> str:
     width: int = get_width(args.width, args.box, args.style, char_len, formatted_head)
     align: str = get_align(args.align, args.box, args.style)
 
-    border: str = char1*width if char_len == 1 else char0 + char1*(width-2) + char0
+    border: str = char1*width if char_len == 1 else char0 + chars + char1*(width - 2*len(chars) - 2) + chars + char0
 
     if args.border_only:
         return border
@@ -82,11 +82,12 @@ def hfmt(head: str, args) -> str:
         )
 
     _header_lines = [
-        f"{_head:{char1}{align}{width - 2*(1 + len(chars))}}" for _head in formatted_head
+        f"{char0}{chars}{_head:{char1}{align}{width - 2*(1 + len(chars))}}{chars[::-1]}{char0}"
+        for _head in formatted_head
     ]
 
 
-    return f"{char0}{chars}{'\n'.join(_header_lines)}{chars[::-1]}{char0}"
+    return f"{'\n'.join(_header_lines)}"
 
 ################################### FORMAT WIDTH ###################################
 
@@ -94,7 +95,10 @@ def get_width(width: str, box: str, style: str, char_len: int, fmt_header: list[
     """Determine the width of the header based on input parameters."""
 
     # Calculate the maximum length of the formatted header lines
-    max_fmt_header: int = max(len(h) for h in fmt_header)
+    try:
+        max_fmt_header: int = max(len(h) for h in fmt_header)
+    except ValueError:
+        max_fmt_header = 0
 
     default: int = 84
     header_width: int = max_fmt_header + 2 * char_len
